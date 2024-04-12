@@ -81,7 +81,9 @@ $$
 The key idea between approach #1 and #2 is that we are changing from "who is my neighbor?" to "are we neighbors?"
 
 We now will choose $P(D = 1\,|\,w_c,w_o) = \sigma(u_o^Tv_c)$ and will maximize the likelihood
-$$\prod_{n=1}^N\prod_{-k\leq j\leq k, \,j\neq 0} P(D = 1\,|\,w_c,w_o).$$
+$$
+\prod_{n=1}^N\prod_{-k\leq j\leq k, \,j\neq 0} P(D = 1\,|\,w_c,w_o).
+$$
 Note that with the above approach a trivial classifier, which outputs 1 for everything, will give the best score. This is because all of the targets are 1! For example, a sample from approach #1 such as $(\mathrm{input}, \mathrm{target}) = (\text{a}, \text{chased})$ is changed to $(\mathrm{input}_1, \mathrm{input}_2, \mathrm{target}) = (\text{a}, \text{chased}, 1).$ To fix this, we introduce <mark style="background: #BBFABBA6;">negative sampling</mark>. 
 ##### Negative Sampling 
 For every training sample, $(\mathrm{input}_1, \mathrm{input}_2, 1)$, we append to our dataset samples $(\text{input}_1, \text{negative}, 0)$ where `negative` is some word that does not appear with $\text{input}_1$ anywhere in the dataset. 
