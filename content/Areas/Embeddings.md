@@ -33,6 +33,7 @@ Some of the training samples in the dataset are then below.
 | $w_1$   | $w_2$   |     | $w_k$     | $w_{k+1}$ |
 | $w_2$   | $w_3$   |     | $w_{k+1}$ | $w_{k+2}$ |
 | $w_3$   | $w_4$   |     | $w_{k+2}$ | $w_{k+3}$ |
+
 Note that for those sequences of words where we do not have enough words to fill the entire window, we can either pad appropriately or omit them. 
 #### Skip-grams
 The key idea with skip-grams is that instead of only looking forward, we now look backwards as well. Given some window size k, we construct the dataset by sliding a window of length k+1 across the sequence. The individual training samples consist of an input of the center word in the window and an output of one of the other words in the window. 
@@ -61,10 +62,11 @@ We will proceed using the skip-gram approach, as it is more commonly used (verif
 #### Approach #1: Center predicting context word
 
 ![[neural_network_skipgram.svg|600]]
+
 For a given input $w_c$, let $\{w_o\}$ be the set of all words outside of the center, i.e. within the context window. We can approximate the probability $P(\{w_o\} \,|\, w_c)$ as 
-$$
-P(\{w_o\} \,|\, w_c) = \prod_{i\in\mathrm{window}} P(w_{o_i}\,|\,w_c).
-$$
+
+$P(\{w_o\} \,|\, w_c) = \prod_{i\in\mathrm{window}} P(w_{o_i}\,|\,w_c)$
+
 Assuming a sequence length of $N$ and a window size of $k$, the [[Likelihood Function]] is 
 $$
 \prod_{n=1}^N\prod_{-k\leq j\leq k, \,j\neq 0} P(w_{n+j}\,|\,w_n).
