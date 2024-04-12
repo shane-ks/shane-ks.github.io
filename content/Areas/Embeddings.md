@@ -64,7 +64,6 @@ We will proceed using the skip-gram approach, as it is more commonly used (verif
 ![[neural_network_skipgram.svg|600]]
 
 For a given input $w_c$, let $\{w_o\}$ be the set of all words outside of the center, i.e. within the context window. We can approximate the probability $P(\{w_o\} \,|\, w_c)$ as 
-
 $$P(\{w_o\} \,|\, w_c) = \prod_{i\in\mathrm{window}} P(w_{o_i}\,|\,w_c)$$
 Assuming a sequence length of $N$ and a window size of $k$, the [[Likelihood Function]] is 
 $$
@@ -82,14 +81,10 @@ $$
 The key idea between approach #1 and #2 is that we are changing from "who is my neighbor?" to "are we neighbors?"
 
 We now will choose $P(D = 1\,|\,w_c,w_o) = \sigma(u_o^Tv_c)$ and will maximize the likelihood
-$$
-\prod_{n=1}^N\prod_{-k\leq j\leq k, \,j\neq 0} P(D = 1\,|\,w_c,w_o).
-$$
+$$\prod_{n=1}^N\prod_{-k\leq j\leq k, \,j\neq 0} P(D = 1\,|\,w_c,w_o).$$
 Note that with the above approach a trivial classifier, which outputs 1 for everything, will give the best score. This is because all of the targets are 1! For example, a sample from approach #1 such as $(\mathrm{input}, \mathrm{target}) = (\text{a}, \text{chased})$ is changed to $(\mathrm{input}_1, \mathrm{input}_2, \mathrm{target}) = (\text{a}, \text{chased}, 1).$ To fix this, we introduce <mark style="background: #BBFABBA6;">negative sampling</mark>. 
 ##### Negative Sampling 
-For every training sample, $(\mathrm{input}_1, \mathrm{input}_2, 1)$, we append to our dataset samples 
-$$(\text{input}_1, \text{negative}, 0)$$
-where `negative` is some word that does not appear with $\text{input}_1$ anywhere in the dataset. 
+For every training sample, $(\mathrm{input}_1, \mathrm{input}_2, 1)$, we append to our dataset samples $(\text{input}_1, \text{negative}, 0)$ where `negative` is some word that does not appear with $\text{input}_1$ anywhere in the dataset. 
 ### Comparison between CBOW and skip-gram
 The end result between CBOW and skip-grams are similar, but differ slightly. CBOW learns better syntactic relationships whereas skip-gram learns better semantic relationships. 
 
