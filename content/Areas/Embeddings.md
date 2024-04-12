@@ -63,12 +63,7 @@ We will proceed using the skip-gram approach, as it is more commonly used (verif
 ![[neural_network_skipgram.svg|600]]
 For a given input $w_c$, let $\{w_o\}$ be the set of all words outside of the center, i.e. within the context window. We can approximate the probability $P(\{w_o\} \,|\, w_c)$ as 
 $$
-P(\{w_o\} \,|\, w_c) = \prod_{i\in\mathrm{window}} P(w_{o_i}\,|\,w_c)
-.$$
-
-$$
-\tag{B}
-P(x_1, \dots, x_T) = \prod_{t=1}^T P(x_t)
+P(\{w_o\} \,|\, w_c) = \prod_{i\in\mathrm{window}} P(w_{o_i}\,|\,w_c).
 $$
 Assuming a sequence length of $N$ and a window size of $k$, the [[Likelihood Function]] is 
 $$
@@ -90,8 +85,12 @@ $$
 \prod_{n=1}^N\prod_{-k\leq j\leq k, \,j\neq 0} P(D = 1\,|\,w_c,w_o).
 $$
 Note that with the above approach a trivial classifier, which outputs 1 for everything, will give the best score. This is because all of the targets are 1! For example, a sample from approach #1 such as 
-$$(\mathrm{input}, \mathrm{target}) = (\text{a}, \text{chased})$$ is changed to 
-$$(\mathrm{input}_1, \mathrm{input}_2, \mathrm{target}) = (\text{a}, \text{chased}, 1).$$ To fix this, we introduce <mark style="background: #BBFABBA6;">negative sampling</mark>. 
+$$
+(\mathrm{input}, \mathrm{target}) = (\text{a}, \text{chased})
+$$ is changed to 
+$$
+(\mathrm{input}_1, \mathrm{input}_2, \mathrm{target}) = (\text{a}, \text{chased}, 1).
+$$ To fix this, we introduce <mark style="background: #BBFABBA6;">negative sampling</mark>. 
 ##### Negative Sampling 
 For every training sample, $(\mathrm{input}_1, \mathrm{input}_2, 1)$, we append to our dataset samples 
 $$
