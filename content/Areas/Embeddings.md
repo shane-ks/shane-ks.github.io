@@ -65,6 +65,11 @@ For a given input $w_c$, let $\{w_o\}$ be the set of all words outside of the ce
 $$
 P(\{w_o\} \,|\, w_c) = \prod_{i\in\mathrm{window}} P(w_{o_i}\,|\,w_c)
 .$$
+
+$$
+\tag{B}
+P(x_1, \dots, x_T) = \prod_{t=1}^T P(x_t)
+$$
 Assuming a sequence length of $N$ and a window size of $k$, the [[Likelihood Function]] is 
 $$
 \prod_{n=1}^N\prod_{-k\leq j\leq k, \,j\neq 0} P(w_{n+j}\,|\,w_n).
